@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>AR.js Video on NFT Marker</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <style>
+      body { margin: 0; overflow: hidden; }
+      .arjs-loader {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .arjs-loader div {
+        text-align: center;
+        font-size: 1.25em;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loader -->
+    <div class="arjs-loader">
+      <div>Loading, please wait...</div>
+    </div>
+
+    <a-scene
+      vr-mode-ui="enabled: false;"
+      renderer="logarithmicDepthBuffer: true;"
+      embedded
+      arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;">
+
+      <!-- Preload video -->
+      <a-assets>
+        <!-- ⚠️ Replace the src with your video file (e.g. direct Google Drive link or hosted .mp4) -->
+        <video id="myvideo" src="./Venice.mp4"
+               preload="auto"
+               playsinline
+               webkit-playsinline
+               muted
+               crossorigin="anonymous">
+        </video>
+      </a-assets>
+
+      <!-- NFT marker -->
+      <a-nft
+        type="nft"
+        url="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/trex-image/trex"
+        smooth="true" smoothCount="10" smoothTolerance="0.01" smoothThreshold="5">
+
+        <!-- Video plane -->
+        <a-video
+          src="#myvideo"
+          width="1" height="0.56"
+          position="0 0 0"
+          rotation="90 0 0"
+          autoplay="true"
+          loop="true">
+        </a-video>
+      </a-nft>
+
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
