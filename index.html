@@ -28,9 +28,9 @@
   </head>
   <body>
     <!-- Loader -->
-<!--     <div class="arjs-loader">
+    <div class="arjs-loader">
       <div>Loading, please wait...</div>
-    </div> -->
+    </div>
 
     <a-scene
       vr-mode-ui="enabled: false;"
@@ -70,6 +70,22 @@
       <a-entity camera></a-entity>
     </a-scene>
   </body>
+
+  <!-- ...existing code... -->
+    <script>
+      window.addEventListener('click', function () {
+        var vid = document.getElementById('myvideo');
+        if (vid) {
+          vid.play();
+        }
+      });
+      // Hide loader when AR.js is ready
+      document.querySelector('a-scene').addEventListener('loaded', function () {
+        document.querySelector('.arjs-loader').style.display = 'none';
+      });
+    </script>
+<!-- ...existing code... -->
 </html>
+
 
 
